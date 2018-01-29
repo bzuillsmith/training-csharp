@@ -39,15 +39,25 @@ namespace Training.Tests
         }
 
         [TestMethod]
-        public void First_ShouldBeTheFirstItemWhenAListHas5Items()
+        public void FirstDotNextShouldBeTheSecondNodeInAListOf2Nodes()
+        {
+            LinkedList.Add(1);
+            LinkedList.Add(2);
+            Assert.IsNotNull(LinkedList.First.Next, "First.Next was null but should be the second node.");
+            Assert.AreEqual(2, LinkedList.First.Next.Value, "First.Next is storing the wrong value");
+        }
+
+        [TestMethod]
+        public void AllNodesShouldConnectToTheirFollowingNode()
         {
             LinkedList.Add(1);
             LinkedList.Add(2);
             LinkedList.Add(3);
             LinkedList.Add(4);
             LinkedList.Add(5);
-            Assert.AreEqual(1, LinkedList.First.Value);
-            Assert.AreEqual(5, LinkedList.Last.Value);
+            Assert.IsNotNull(LinkedList.First.Next, "First.Next was null but should be the second node.");
+            Assert.AreEqual(2, LinkedList.First.Next.Value, "First.Next is assigned to a node with the wrong value.");
+            Assert.AreEqual(LinkedList.Last, LinkedList.First.Next.Next.Next.Next, "All nodes should connect to the following node until Last is reached");
         }
 
         [TestMethod]

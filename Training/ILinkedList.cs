@@ -11,19 +11,19 @@
         /// Adds an item to the end of the list.
         /// </summary>
         /// <param name="item"></param>
-        void Add(object item);
+        void Add(int item);
 
         /// <summary>
         /// Removes an item from the list.
         /// </summary>
         /// <param name="item"></param>
-        void InsertAt(object item);
+        void InsertAt(int item);
 
         /// <summary>
         /// Removes an item from the list.
         /// </summary>
         /// <param name="item"></param>
-        void Remove(object item);
+        void Remove(int item);
 
         /// <summary>
         /// Finds the first node that has the given value
