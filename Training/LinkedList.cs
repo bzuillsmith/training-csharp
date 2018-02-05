@@ -33,26 +33,19 @@ namespace Training
             if (First == null) return null;
 
             /// Create a new pointer
-            LinkedListNode temp = null;
+            LinkedListNode current = null;
 
             // Point that pointer to the First node
-            temp = First;
+            current = First;
 
             // While temp is not pointing to the last node
-            while (temp != null)
+            while (current != null && current.Value != value)
             {
-                // If the value inside temp no is the value we're looking for
-                if (temp.Value == value)
-                {
-                    // Return it
-                    return temp;
-                }
-
                 // Reconnect the linked list
-                temp = temp.Next;
+                current = current.Next;
             }
 
-            return null;
+            return current;
         }
 
         public LinkedListNode FindLast(int value)
@@ -60,16 +53,59 @@ namespace Training
             throw new NotImplementedException();
         }
 
-        public void InsertAt(int item)
+        public void InsertAt(int index, int item)
         {
-            throw new NotImplementedException();
+            // If index is less than zero throw out exception.
+            if (index < 0) throw new IndexOutOfRangeException("Index is out of range should throw an exception");
+
+            if (First == null) throw new ArgumentNullException("Attempting to insert and item to an empty list.");
+
+            LinkedListNode currentNode = null;
+
+            LinkedListNode newNode = new LinkedListNode();
+            newNode.Value = item;
+
+            var currentIndex = 0;
+
+            if (First != null)
+            {
+                currentNode = First;
+
+                if (index == 0)
+                {
+                    
+                    First = newNode;
+                    newNode.Next = currentNode;
+                    return;
+                }
+
+                while (currentIndex != index - 1)
+                {
+                    // move to the next node
+                    currentNode = currentNode.Next;
+                    currentIndex += 1;
+                }
+                Count += 1;
+
+                if(Last == currentNode)
+                {
+                    currentNode.Next = newNode;
+                    Last = newNode;
+                }
+
+                currentNode.Next = newNode.Next;
+                currentNode.Next = newNode;
+            }
+            else
+            {
+                throw new InvalidOperationException("Attempting to instert an item in an empty list should throw an exception.");
+            }
         }
 
         public void Remove(int item)
         {
             if (First != null)
             {
-                //Find the node with the item
                 LinkedListNode previous = null;
 
                 LinkedListNode current = null;

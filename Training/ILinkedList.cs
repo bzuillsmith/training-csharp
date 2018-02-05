@@ -17,7 +17,7 @@
         /// Removes an item from the list.
         /// </summary>
         /// <param name="item"></param>
-        void InsertAt(int item);
+        void InsertAt(int index, int item);
 
         /// <summary>
         /// Removes an item from the list.
