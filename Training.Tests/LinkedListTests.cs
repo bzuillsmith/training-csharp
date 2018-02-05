@@ -174,5 +174,55 @@ namespace Training.Tests
 
             Assert.ThrowsException<InvalidOperationException>(() => LinkedList.Remove(4), "Attempting to remove an item not in the list should throw an exception.");
         }
+
+        [TestMethod]
+        public void Insert_ShouldInsertItemAtASpecificIndex()
+        {
+            LinkedList.Add(9);
+            LinkedList.Add(6);
+            LinkedList.Add(5);
+            
+            LinkedList.InsertAt(2, 3);
+            var item = LinkedList.First.Next.Next;
+            Assert.AreEqual(3, item.Value);
+        }
+
+        [TestMethod]
+        public void Insert_ShouldInsertItemAtFirstIndex()
+        {
+            LinkedList.Add(9);
+            LinkedList.Add(6);
+            LinkedList.Add(5);
+
+            LinkedList.InsertAt(0, 10);
+            var item = LinkedList.First;
+            Assert.AreEqual(10, item.Value);
+        }
+
+        [TestMethod]
+        public void Insert_ShouldInsertItemAtLastIndex()
+        {
+            LinkedList.Add(9);
+            LinkedList.Add(6);
+            LinkedList.Add(5);
+
+            LinkedList.InsertAt(3, 3);
+            var item = LinkedList.Last;
+            Assert.AreEqual(3, item.Value);
+        }
+
+        [TestMethod]
+        public void Insert_ShouldThrowAnExceptionWhenAttemptingToInsertAnItemAtAnIndexOutOfRange()
+        {
+            Assert.ThrowsException<IndexOutOfRangeException>(() => LinkedList.InsertAt(-1, 1),
+                "Index is out of range should throw an exception");
+        }
+
+        [TestMethod]
+        public void Insert_ShouldThrowAnExceptionWhenAttemptingToInsertAnItemToAnEmptyList()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => LinkedList.InsertAt(0, 1),
+                "Attempting to insert and item to an empty list.");
+        }
     }
 }
