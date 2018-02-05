@@ -176,7 +176,7 @@ namespace Training.Tests
         }
 
         [TestMethod]
-        public void Insert_ShouldInsertItemAtASpecificIndex()
+        public void InsertAt_ShouldInsertItemAtASpecificIndex()
         {
             LinkedList.Add(9);
             LinkedList.Add(6);
@@ -188,7 +188,7 @@ namespace Training.Tests
         }
 
         [TestMethod]
-        public void Insert_ShouldInsertItemAtFirstIndex()
+        public void InsertAt_ShouldInsertItemAtFirstIndex()
         {
             LinkedList.Add(9);
             LinkedList.Add(6);
@@ -200,7 +200,7 @@ namespace Training.Tests
         }
 
         [TestMethod]
-        public void Insert_ShouldInsertItemAtLastIndex()
+        public void InsertAt_ShouldInsertItemAtLastIndex()
         {
             LinkedList.Add(9);
             LinkedList.Add(6);
@@ -212,14 +212,14 @@ namespace Training.Tests
         }
 
         [TestMethod]
-        public void Insert_ShouldThrowAnExceptionWhenAttemptingToInsertAnItemAtAnIndexOutOfRange()
+        public void InsertAt_ShouldThrowAnExceptionWhenAttemptingToInsertAnItemAtAnIndexOutOfRange()
         {
             Assert.ThrowsException<IndexOutOfRangeException>(() => LinkedList.InsertAt(-1, 1),
                 "Index is out of range should throw an exception");
         }
 
         [TestMethod]
-        public void Insert_ShouldThrowAnExceptionWhenAttemptingToInsertAnItemToAnEmptyList()
+        public void InsertAt_ShouldThrowAnExceptionWhenAttemptingToInsertAnItemToAnEmptyList()
         {
             Assert.ThrowsException<ArgumentNullException>(() => LinkedList.InsertAt(0, 1),
                 "Attempting to insert and item to an empty list.");
