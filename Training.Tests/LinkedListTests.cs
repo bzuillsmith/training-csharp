@@ -227,5 +227,36 @@ namespace Training.Tests
             Assert.ThrowsException<ArgumentNullException>(() => LinkedList.InsertAt(0, 1),
                 "Attempting to insert and item to an empty list.");
         }
+
+        [TestMethod]
+        public void FindLast_ShouldReturnTheLastValueInListThatMatchesValue()
+        {
+            LinkedList.Add(3);
+            LinkedList.Add(6);
+            LinkedList.Add(9);
+            LinkedList.Add(10);
+            LinkedList.Add(3);
+            LinkedList.Add(4);
+            LinkedList.Add(3);
+            LinkedList.Add(6);
+
+            var result = LinkedList.FindLast(3);
+            Assert.AreEqual(LinkedList.First.Next.Next.Next.Next.Next.Next, result);
+        }
+
+        [TestMethod]
+        public void FindLast_ReturnsNullWhenTheValueIsNotInTheList()
+        {
+            var result = LinkedList.FindLast(3);
+            Assert.AreEqual(null, result);
+        }
+
+        [TestMethod]
+        public void FindLast_ReturnsCorrectNodeWhenOnlyOneNodeInTheList()
+        {
+            LinkedList.Add(3);
+            var result = LinkedList.FindLast(3);
+            Assert.AreEqual(LinkedList.First, result);
+        }
     }
 }
