@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace Training
 {
@@ -72,8 +73,7 @@ namespace Training
                 currentNode = First;
 
                 if (index == 0)
-                {
-                    
+                {                  
                     First = newNode;
                     newNode.Next = currentNode;
                     return;
@@ -91,9 +91,13 @@ namespace Training
                 {
                     currentNode.Next = newNode;
                     Last = newNode;
+                    return;
                 }
 
-                currentNode.Next = newNode.Next;
+                // Point newNode.Next to same node where current.Next is pointing to avoiding a lost node
+                newNode.Next = currentNode.Next;
+
+                // Point newNode.Next to the newNode inserting it in between the proceeding node
                 currentNode.Next = newNode;
             }
             else
@@ -156,6 +160,23 @@ namespace Training
             // Update Count
             Count -= 1;
         }
+
+        public override string ToString()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.Append("[");
+            var current = this.First;
+            while (current != null)
+            {
+                sb.Append(current.ToString());
+                sb.Append(",");
+                current = current.Next;
+            }
+            sb.Remove(sb.Length - 1, 1);
+            sb.Append("]");
+
+            return sb.ToString();
+        }
     }
 
     /// <summary>
@@ -166,5 +187,10 @@ namespace Training
         public int Value { get; set; }
 
         public LinkedListNode Next;
+
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
     }
 }
