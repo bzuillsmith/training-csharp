@@ -181,10 +181,10 @@ namespace Training.Tests
             LinkedList.Add(9);
             LinkedList.Add(6);
             LinkedList.Add(5);
-            
+
             LinkedList.InsertAt(2, 3);
-            var item = LinkedList.First.Next.Next;
-            Assert.AreEqual(3, item.Value);
+            Assert.AreEqual(3, LinkedList.First.Next.Next.Value);
+            Assert.AreEqual(5, LinkedList.First.Next.Next.Next.Value);
         }
 
         [TestMethod]
@@ -197,6 +197,8 @@ namespace Training.Tests
             LinkedList.InsertAt(0, 10);
             var item = LinkedList.First;
             Assert.AreEqual(10, item.Value);
+            Assert.AreEqual(9, LinkedList.First.Next.Value);
+            Assert.AreEqual(6, LinkedList.First.Next.Next.Value);
         }
 
         [TestMethod]
@@ -209,6 +211,7 @@ namespace Training.Tests
             LinkedList.InsertAt(3, 3);
             var item = LinkedList.Last;
             Assert.AreEqual(3, item.Value);
+            Assert.AreEqual(LinkedList.Last, LinkedList.First.Next.Next.Next);
         }
 
         [TestMethod]
