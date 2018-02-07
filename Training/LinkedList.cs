@@ -24,7 +24,7 @@ namespace Training
             throw new NotImplementedException();
         }
 
-        public void InsertAt(int item)
+        public void InsertAt(int index, int item)
         {
             throw new NotImplementedException();
         }
