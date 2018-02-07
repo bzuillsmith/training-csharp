@@ -85,9 +85,43 @@ namespace Training.Tests
         }
 
         [TestMethod]
+        public void Find_ShouldReturnNullIfTheListIsEmpty()
+        {
+            Assert.IsNull(LinkedList.Find(1), "An empty list should return null when Find() is called");
+        }
+
+        [TestMethod]
+        public void Find_ShouldReturnTheFirstNodeIfItsAMatch()
+        {
+            LinkedList.Add(3);
+            var result = LinkedList.Find(3);
+            Assert.AreEqual(LinkedList.First, result);
+        }
+
+        [TestMethod]
+        public void Find_ShouldReturnTheTheCorrectNodeInAListOf2Nodes()
+        {
+            LinkedList.Add(3);
+            LinkedList.Add(6);
+            Assert.AreEqual(LinkedList.First, LinkedList.Find(3));
+            Assert.AreEqual(LinkedList.Last, LinkedList.Find(6));
+        }
+
+        [TestMethod]
+        public void Find_ShouldReturnTheTheCorrectNodeInAListOfMoreThan2Nodes()
+        {
+            LinkedList.Add(3);
+            LinkedList.Add(6);
+            LinkedList.Add(9);
+            LinkedList.Add(12);
+            Assert.AreEqual(LinkedList.First.Next.Next, LinkedList.Find(9));
+        }
+
+        [TestMethod]
         public void Remove_ShouldThrowAnExceptionWhenAttemptingToRemoveAnItemFromAnEmptyList()
         {
-            Assert.ThrowsException<InvalidOperationException>(() => LinkedList.Remove(4), "Attempting to remove an item not in the list should throw an exception.");
+            Assert.ThrowsException<InvalidOperationException>(() => LinkedList.Remove(4),
+                "Attempting to remove an item from an empty list should throw an exception.");
         }
 
         [TestMethod]
@@ -99,7 +133,7 @@ namespace Training.Tests
 
             LinkedList.Remove(1);
 
-            Assert.AreNotEqual(4, LinkedList.First.Value);
+            Assert.AreEqual(2, LinkedList.First.Value);
         }
 
         [TestMethod]
@@ -128,6 +162,7 @@ namespace Training.Tests
             LinkedList.Remove(3);
 
             Assert.AreNotEqual(3, LinkedList.Last.Value);
+            Assert.AreEqual(10, LinkedList.Last.Value);
         }
 
         [TestMethod]
