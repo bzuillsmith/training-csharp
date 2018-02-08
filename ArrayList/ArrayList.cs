@@ -13,7 +13,7 @@ namespace Training02
     {
         string[] _internalArray = new String[4];
 
-        public int Count => throw new NotImplementedException();
+        public int Count => _internalArray.Length - 4;
 
         /// <summary>
         /// Add will put the given item into the array at the "last" spot. That is, the first item, goes in
@@ -25,9 +25,23 @@ namespace Training02
         /// <param name="item"></param>
         public void Add(string item)
         {
-            // TODO: place new items in the next open spot in the internal array. If there is no more space
-            //       in the internal array, call DoubleArraySize before insterting the item.
-            _internalArray[0] = item;
+            // TODO: place new items in the next open spot in the internal array. 
+            for (var i = 0; i <= _internalArray.Length - 1; i++)
+            {
+                if (Count <= _internalArray.Length - 1)
+                {
+                    _internalArray[i] = item;
+                    Count.Equals(i + 1);
+                    _internalArray[i].Insert(i, item);
+                }
+                // If there is no more space in the internal array
+                else if (Count > _internalArray.Length - 1)
+                {
+                    // call DoubleArraySize before insterting the item.
+                    DoubleArraySize();
+                }
+            }
+
         }
 
         private void DoubleArraySize()
