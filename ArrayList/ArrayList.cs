@@ -81,5 +81,20 @@ namespace Training02
         {
             return $"[{string.Join(",", _internalArray)}]";
         }
+
+        public string this[int i]
+        {
+            get
+            {
+                if (i > Count - 1) throw new IndexOutOfRangeException();
+                return _internalArray[i];
+            }
+            set
+            {
+                if (i > Count - 1) throw new IndexOutOfRangeException();
+                _internalArray[i] = value;
+
+            }
+        }
     }
 }
