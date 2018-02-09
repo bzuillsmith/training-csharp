@@ -13,7 +13,7 @@ namespace Training02
     {
         string[] _internalArray = new String[4];
 
-        public int Count => _internalArray.Length - 4;
+        public int Count { get; private set; }
 
         /// <summary>
         /// Add will put the given item into the array at the "last" spot. That is, the first item, goes in
@@ -26,28 +26,33 @@ namespace Training02
         public void Add(string item)
         {
             // TODO: place new items in the next open spot in the internal array. 
-            for (var i = 0; i <= _internalArray.Length - 1; i++)
+            if (Count < _internalArray.Length)
             {
-                if (Count <= _internalArray.Length - 1)
-                {
-                    _internalArray[i] = item;
-                    Count.Equals(i + 1);
-                    _internalArray[i].Insert(i, item);
-                }
-                // If there is no more space in the internal array
-                else if (Count > _internalArray.Length - 1)
-                {
-                    // call DoubleArraySize before insterting the item.
-                    DoubleArraySize();
-                }
+                _internalArray[Count] = item;
+                Count += 1;
             }
-
+            // If there is no more space in the internal array
+            else
+            {
+                // call DoubleArraySize before insterting the item.
+                DoubleArraySize();
+                _internalArray[Count] = item;
+            }
         }
 
         private void DoubleArraySize()
         {
-            // TODO: Write your code to double the size of the array here. Create a new array and 
-            //       copy the current contents into the new array.
+            // TODO: Write your code to double the size of the array here. 
+            // Create a new array and copy the current contents into the new array.
+            string[] _newInternalArray = new String[_internalArray.Length * 2];
+            
+            // Loop until index is less/equal than the array index
+            for (var i = 0; i <= _internalArray.Length - 1; i++)
+            {
+                _newInternalArray[i] = _internalArray[i];
+            }
+
+            _internalArray = _newInternalArray;
         }
 
         /// <summary>
