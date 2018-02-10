@@ -62,7 +62,16 @@ namespace Training02
         /// <returns></returns>
         public int IndexOf(string item)
         {
-            throw new NotImplementedException();
+            int index = 0;
+
+            for (var i = 0; i <= _internalArray.Length - 1; i++)
+            {
+                if (_internalArray[i] == item)
+                {
+                    index = i;
+                }
+            }
+            return index;
         }
 
         /// <summary>
