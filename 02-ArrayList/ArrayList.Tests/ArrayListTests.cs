@@ -101,7 +101,7 @@ namespace Training02.Tests
         [TestMethod]
         public void InsertAt_ShouldInsertAtFirstIndex()
         {
-            // insert at 0
+            // insert at first index
 
             //Arrange
             ArrayList.Add("a");
