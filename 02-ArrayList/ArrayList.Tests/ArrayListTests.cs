@@ -82,23 +82,24 @@ namespace Training02.Tests
         }
 
         [TestMethod]
-
-        public void InsertAt_1()
+        public void InsertAt_ShouldInsertAtLastIndex()
         {
             //insert at last index (just like add)
+
             //Arrange
             ArrayList.Add("a");
             ArrayList.Add("b");
             ArrayList.Add("c");
 
             // Act
-            ArrayList.InsertAt(1, "d");
+            ArrayList.InsertAt(3, "d");
 
             // Assert
             Assert.AreEqual("[a,b,c,d]", ArrayList.ToString());
         }
 
-        public void InsertAt_2()
+        [TestMethod]
+        public void InsertAt_ShouldInsertAtFirstIndex()
         {
             // insert at 0
 
@@ -113,8 +114,9 @@ namespace Training02.Tests
             // Assert
             Assert.AreEqual("[d,a,b,c]", ArrayList.ToString());
         }
-        
-        public void InsertAt_3()
+
+        [TestMethod]
+        public void InsertAt_ShouldInsertInTheMiddle()
         {
             // somewhere in the middle of the existing data
 
@@ -130,9 +132,11 @@ namespace Training02.Tests
             Assert.AreEqual("[a,d,b,c]", ArrayList.ToString());
         }
 
-        public void InsertAt_4()
+        [TestMethod]
+        public void InsertAt_ShouldInsertAtSpecificIndexLastWhenArrayIsFull()
         {
             // insert at when the internal array is full
+
             //Arrange
             ArrayList.Add("a");
             ArrayList.Add("b");
@@ -143,8 +147,7 @@ namespace Training02.Tests
             ArrayList.InsertAt(2, "e");
 
             // Assert
-            Assert.AreEqual("[a,d,b,c]", ArrayList.ToString());
+            Assert.AreEqual("[a,b,e,c,d,,,]", ArrayList.ToString());
         }
-
     }
 }
