@@ -174,5 +174,89 @@ namespace Training.Tests
 
             Assert.ThrowsException<InvalidOperationException>(() => LinkedList.Remove(4), "Attempting to remove an item not in the list should throw an exception.");
         }
+
+        [TestMethod]
+        public void InsertAt_ShouldInsertItemAtASpecificIndex()
+        {
+            LinkedList.Add(9);
+            LinkedList.Add(6);
+            LinkedList.Add(5);
+
+            LinkedList.InsertAt(2, 3);
+            Assert.AreEqual(3, LinkedList.First.Next.Next.Value);
+            Assert.AreEqual(5, LinkedList.First.Next.Next.Next.Value);
+        }
+
+        [TestMethod]
+        public void InsertAt_ShouldInsertItemAtFirstIndex()
+        {
+            LinkedList.Add(9);
+            LinkedList.Add(6);
+            LinkedList.Add(5);
+
+            LinkedList.InsertAt(0, 10);
+            var item = LinkedList.First;
+            Assert.AreEqual(10, item.Value);
+            Assert.AreEqual(9, LinkedList.First.Next.Value);
+            Assert.AreEqual(6, LinkedList.First.Next.Next.Value);
+        }
+
+        [TestMethod]
+        public void InsertAt_ShouldInsertItemAtLastIndex()
+        {
+            LinkedList.Add(9);
+            LinkedList.Add(6);
+            LinkedList.Add(5);
+
+            LinkedList.InsertAt(3, 3);
+            var item = LinkedList.Last;
+            Assert.AreEqual(3, item.Value);
+            Assert.AreEqual(LinkedList.Last, LinkedList.First.Next.Next.Next);
+        }
+
+        [TestMethod]
+        public void InsertAt_ShouldThrowAnExceptionWhenAttemptingToInsertAnItemAtAnIndexOutOfRange()
+        {
+            Assert.ThrowsException<IndexOutOfRangeException>(() => LinkedList.InsertAt(-1, 1),
+                "Index is out of range should throw an exception");
+        }
+
+        [TestMethod]
+        public void InsertAt_ShouldThrowAnExceptionWhenAttemptingToInsertAnItemToAnEmptyList()
+        {
+            Assert.ThrowsException<ArgumentNullException>(() => LinkedList.InsertAt(0, 1),
+                "Attempting to insert and item to an empty list.");
+        }
+
+        [TestMethod]
+        public void FindLast_ShouldReturnTheLastValueInListThatMatchesValue()
+        {
+            LinkedList.Add(3);
+            LinkedList.Add(6);
+            LinkedList.Add(9);
+            LinkedList.Add(10);
+            LinkedList.Add(3);
+            LinkedList.Add(4);
+            LinkedList.Add(3);
+            LinkedList.Add(6);
+
+            var result = LinkedList.FindLast(3);
+            Assert.AreEqual(LinkedList.First.Next.Next.Next.Next.Next.Next, result);
+        }
+
+        [TestMethod]
+        public void FindLast_ReturnsNullWhenTheValueIsNotInTheList()
+        {
+            var result = LinkedList.FindLast(3);
+            Assert.AreEqual(null, result);
+        }
+
+        [TestMethod]
+        public void FindLast_ReturnsCorrectNodeWhenOnlyOneNodeInTheList()
+        {
+            LinkedList.Add(3);
+            var result = LinkedList.FindLast(3);
+            Assert.AreEqual(LinkedList.First, result);
+        }
     }
 }

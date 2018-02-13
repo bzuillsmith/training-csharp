@@ -13,7 +13,7 @@ namespace Training02
     {
         string[] _internalArray = new String[4];
 
-        public int Count => throw new NotImplementedException();
+        public int Count { get; private set; }
 
         /// <summary>
         /// Add will put the given item into the array at the "last" spot. That is, the first item, goes in
@@ -25,15 +25,34 @@ namespace Training02
         /// <param name="item"></param>
         public void Add(string item)
         {
-            // TODO: place new items in the next open spot in the internal array. If there is no more space
-            //       in the internal array, call DoubleArraySize before insterting the item.
-            _internalArray[0] = item;
+            // TODO: place new items in the next open spot in the internal array. 
+            if (Count < _internalArray.Length)
+            {
+                _internalArray[Count] = item;
+                Count += 1;
+            }
+            // If there is no more space in the internal array
+            else
+            {
+                // call DoubleArraySize before insterting the item.
+                DoubleArraySize();
+                _internalArray[Count] = item;
+            }
         }
 
         private void DoubleArraySize()
         {
-            // TODO: Write your code to double the size of the array here. Create a new array and 
-            //       copy the current contents into the new array.
+            // TODO: Write your code to double the size of the array here. 
+            // Create a new array and copy the current contents into the new array.
+            string[] _newInternalArray = new String[_internalArray.Length * 2];
+            
+            // Loop until index is less/equal than the array index
+            for (var i = 0; i <= _internalArray.Length - 1; i++)
+            {
+                _newInternalArray[i] = _internalArray[i];
+            }
+
+            _internalArray = _newInternalArray;
         }
 
         /// <summary>
@@ -43,7 +62,16 @@ namespace Training02
         /// <returns></returns>
         public int IndexOf(string item)
         {
-            throw new NotImplementedException();
+            int index = 0;
+
+            for (var i = 0; i <= _internalArray.Length - 1; i++)
+            {
+                if (_internalArray[i] == item)
+                {
+                    index = i;
+                }
+            }
+            return index;
         }
 
         /// <summary>
@@ -60,7 +88,34 @@ namespace Training02
         /// <param name="item"></param>
         public void InsertAt(int index, string item)
         {
-            throw new NotImplementedException();
+            // Add to last index
+            if (index == Count)
+            {
+                Add(item);
+            }
+            else
+            {
+                // iterate backward on array from Count to the index where inserting at + 1, and move each item forward.
+                for (var i = Count; i >= index - 1; i--)
+                {
+                    if (i == index)
+                    {
+                        _internalArray[i] = item;
+                    }
+                    else
+                    {
+                        if (i == -1 || i == 0 || i < index) return;
+
+                        if (Count > _internalArray.Length - 1)
+                        {
+                            DoubleArraySize();
+                        }
+
+                        //set current array index to what was in the index before it until insertion point is reached.
+                        _internalArray[i] = _internalArray[i - 1];
+                    }
+                }
+            }
         }
 
         public void Remove(string item)
